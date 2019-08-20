@@ -24,6 +24,9 @@ async function getBabelConfig(asset) {
   let isSource =
     !!(pkg && pkg.source && (await fs.realpath(asset.name)) !== asset.name) ||
     !asset.name.includes(NODE_MODULES);
+  
+  // Always compile node_modules (hotfix; fix me; pls)
+  isSource = true;
 
   // Try to resolve a .babelrc file. If one is found, consider the module source code.
   let babelrc = await getBabelRc(asset, isSource);
